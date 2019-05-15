@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_PASANTIA01" Class="DbPasantiaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=DB_PASANTIA01;Persist Security Info=True;User ID=sa" SettingsObjectName="DATA.Properties.Settings" SettingsPropertyName="DB_PASANTIA01ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TBL_AREA" Member="TBL_AREAs">
+    <Type Name="TBL_AREA">
+      <Column Name="are_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="are_descripcion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="are_status" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="are_add" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_AREA_TBL_EMPRESA" Member="TBL_EMPRESAs" ThisKey="are_id" OtherKey="are_id" Type="TBL_EMPRESA" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_USUARIO" Member="TBL_USUARIOs">
+    <Type Name="TBL_USUARIO">
+      <Column Name="usu_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usu_apellidos" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_nombres" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_username" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_password" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_status" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_add" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="rol_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TBL_ROL_TBL_USUARIO" Member="TBL_ROL" ThisKey="rol_id" OtherKey="rol_id" Type="TBL_ROL" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_CARRERA" Member="TBL_CARRERAs">
+    <Type Name="TBL_CARRERA">
+      <Column Name="car_id" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="car_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="car_campus" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="car_direccion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="car_status" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="car_add" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="inst_id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TBL_CARRERA_TBL_ESTUDIANTE" Member="TBL_ESTUDIANTEs" ThisKey="car_id,inst_id" OtherKey="car_id,inst_id" Type="TBL_ESTUDIANTE" />
+      <Association Name="TBL_INSTITUCION_TBL_CARRERA" Member="TBL_INSTITUCION" ThisKey="inst_id" OtherKey="inst_id" Type="TBL_INSTITUCION" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_DOCENTE" Member="TBL_DOCENTEs">
+    <Type Name="TBL_DOCENTE">
+      <Column Name="doc_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="doc_tipoidentificacion" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="doc_identificacion" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="doc_apellidos" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="doc_nombres" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="doc_direccion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="doc_telefono" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="doc_status" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="doc_add" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_DOCENTE_TBL_PASANTIA" Member="TBL_PASANTIAs" ThisKey="doc_id" OtherKey="doc_id" Type="TBL_PASANTIA" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_EMPRESA" Member="TBL_EMPRESAs">
+    <Type Name="TBL_EMPRESA">
+      <Column Name="emp_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="emp_nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="emp_ruc" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
+      <Column Name="emp_postal" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="emp_telefono" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="emp_representante" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="emp_email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="are_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="emp_calleprincipal" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="emp_callesecundaria" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="emp_longitud" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="emp_latitud" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="emp_referencia" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="emp_status" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="emp_add" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_EMPRESA_TBL_PASANTIA" Member="TBL_PASANTIAs" ThisKey="emp_id,are_id" OtherKey="emp_id,are_id" Type="TBL_PASANTIA" />
+      <Association Name="TBL_AREA_TBL_EMPRESA" Member="TBL_AREA" ThisKey="are_id" OtherKey="are_id" Type="TBL_AREA" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_ESTUDIANTE" Member="TBL_ESTUDIANTEs">
+    <Type Name="TBL_ESTUDIANTE">
+      <Column Name="est_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="est_tipoidentificacion" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="est_identificacion" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="est_apellidos" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="est_nombres" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="est_direccion" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="est_telefono" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="est_celular" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="est_email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="est_genero" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="est_status" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="est_add" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="car_id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="inst_id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TBL_ESTUDIANTE_TBL_PASANTIA" Member="TBL_PASANTIAs" ThisKey="est_id,car_id,inst_id" OtherKey="est_id,car_id,inst_id" Type="TBL_PASANTIA" />
+      <Association Name="TBL_CARRERA_TBL_ESTUDIANTE" Member="TBL_CARRERA" ThisKey="car_id,inst_id" OtherKey="car_id,inst_id" Type="TBL_CARRERA" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_INSTITUCION" Member="TBL_INSTITUCIONs">
+    <Type Name="TBL_INSTITUCION">
+      <Column Name="inst_id" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="inst_nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="inst_direcciom" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="inst_telefono" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="inst_status" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="inst_add" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_INSTITUCION_TBL_CARRERA" Member="TBL_CARRERAs" ThisKey="inst_id" OtherKey="inst_id" Type="TBL_CARRERA" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_PASANTIA" Member="TBL_PASANTIAs">
+    <Type Name="TBL_PASANTIA">
+      <Column Name="pas_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="pas_fechaini" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pas_fechafin" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="pas_horas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pas_status" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="pas_add" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="est_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="car_id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="inst_id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="emp_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="doc_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="are_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TBL_ESTUDIANTE_TBL_PASANTIA" Member="TBL_ESTUDIANTE" ThisKey="est_id,car_id,inst_id" OtherKey="est_id,car_id,inst_id" Type="TBL_ESTUDIANTE" IsForeignKey="true" />
+      <Association Name="TBL_EMPRESA_TBL_PASANTIA" Member="TBL_EMPRESA" ThisKey="emp_id,are_id" OtherKey="emp_id,are_id" Type="TBL_EMPRESA" IsForeignKey="true" />
+      <Association Name="TBL_DOCENTE_TBL_PASANTIA" Member="TBL_DOCENTE" ThisKey="doc_id" OtherKey="doc_id" Type="TBL_DOCENTE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_ROL" Member="TBL_ROLs">
+    <Type Name="TBL_ROL">
+      <Column Name="rol_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="rol_descripcion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="rol_status" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="rol_add" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_ROL_TBL_USUARIO" Member="TBL_USUARIOs" ThisKey="rol_id" OtherKey="rol_id" Type="TBL_USUARIO" />
+    </Type>
+  </Table>
+</Database>
